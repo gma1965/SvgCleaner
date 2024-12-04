@@ -74,10 +74,20 @@ namespace SvgCleaner
 
                     if (el.Name.LocalName == "circle")
                     {
+                        double x = Parse(el.Attribute("cx").Value);
+                        double y = Parse(el.Attribute("cy").Value);
+                        double r = Parse(el.Attribute("r").Value);
+                        double l = r / Math.Sqrt(2);
+
                         s.Begin = new Position
                         {
-                            x = Parse(el.Attribute("cx").Value),
-                            y = Parse(el.Attribute("cy").Value)
+                            x = x - l,
+                            y = y - l
+                        };
+                        s.End = new Position
+                        {
+                            x = x - l,
+                            y = y - l
                         };
                     }
                 }
