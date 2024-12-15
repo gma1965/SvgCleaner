@@ -57,7 +57,6 @@ namespace SvgCleaner
 
         internal void Start(string file)
         {
-
             XDocument svg = XDocument.Parse(File.ReadAllText(file));
 
             //Split in smallest segments
@@ -268,7 +267,7 @@ namespace SvgCleaner
         private void CreatePaths()
         {
             List<List<Segment>> paths = new List<List<Segment>>();
-            do
+            while (Segments.Count > 0) 
             {
                 //Start, find segment with start position closed to the origin (bottom-left)
                 List<Segment> path = new List<Segment>();
@@ -310,8 +309,7 @@ namespace SvgCleaner
                     }
 
                 } while (count != path.Count);
-
-            } while (Segments.Count > 0);
+            }
 
             foreach (var p in paths)
             {
